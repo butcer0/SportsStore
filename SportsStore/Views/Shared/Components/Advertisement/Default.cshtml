@@ -1,0 +1,9 @@
+﻿@model Advertisement
+
+<a class="card-img"
+   asp-action="AddClick"
+   asp-controller="Advertisement"
+   asp-route-adID =@Model.AdvertisementID
+   asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()">
+    <img alt="@Model.Description" src="@Url.Content(Model.ImageURL)" />
+</a>

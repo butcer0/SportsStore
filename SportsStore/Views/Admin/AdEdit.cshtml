@@ -1,0 +1,34 @@
+﻿@model Advertisement
+@{ 
+    ViewBag.Title = "Edit Advertisement";
+    Layout = "_AdminLayout";
+}
+
+<form asp-action="AdEdit" method="post">
+    <input type="hidden" asp-for="AdvertisementID" />
+    <input type="hidden" asp-for="Clicks" />
+    <div class="form-group">
+        <label asp-for="CompanyName"></label>
+        <div><span asp-validation-for="CompanyName" class="text-danger"></span></div>
+        <input asp-for="CompanyName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <div><span asp-validation-for="Description" class="text-danger"></span></div>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageURL"></label>
+        <div><span asp-validation-for="ImageURL" class="text-danger"></span></div>
+        <input asp-for="ImageURL" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PricePerClick"></label>
+        <div><span asp-validation-for="PricePerClick" class="text-danger"></span></div>
+        <input asp-for="PricePerClick" class="form-control" />
+    </div>
+  <div class="text-center">
+      <button class="btn btn-primary" type="submit">Save</button>
+      <a asp-action="AdIndex" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>

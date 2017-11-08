@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Advertisement>
+
+@{
+    ViewBag.Title = "All Advertisements";
+    Layout = "_AdminLayout";
+}
+
+@if (Model.Count() == 0)
+{
+    <div class="text-center m-2">
+        <form asp-action="SeedDatabase" method="post">
+            <button type="submit" class="btn btn-danger">Seed Database</button>
+        </form>
+    </div>
+
+}
+else
+{
+    <table class="taable table-striped table-bordered table-sm">
+        <tr>
+            <th class="text-right">ID</th>
+            <th>Company Name</th>
+            <th class="text-right">PPC</th>
+            <th class="text-right">Clicks</th>
+            <th class="text-right">Total</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-right">@item.AdvertisementID</td>
+                <td>@item.CompanyName</td>
+                <td class="text-right">@item.PricePerClick.ToString("c")</td>
+                <td class="text-right">@item.Clicks</td>
+                <td class="text-right">@item.ComputeTotalValue()</td>
+                <td class="text-center">
+                    <form asp-action="AdDelete" method="post">
+                        <a asp-action="AdEdit" class="btn btn-sm btn-warning"
+                           asp-route-adID="@item.AdvertisementID">
+                            Edit
+                        </a>
+                        <a asp-action="AdClicksReset" class="btn btn-sm btn-success"
+                           asp-route-adID="@item.AdvertisementID">
+                            Reset Clicks
+                        </a>
+                        <input type="hidden" name="adID" value="@item.AdvertisementID" />
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+                    </form>
+
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="text-right font-weight-bold">Total Revenue:</td>
+            <td class="text-left font-weight-bold">@Model.Sum(a => a.ComputeTotalValue())</td>
+        </tr>
+    </table>
+}
+<div class="text-center">
+    <a asp-action="AdCreate" class="btn btn-primary">Add Advertisement</a>
+</div>
