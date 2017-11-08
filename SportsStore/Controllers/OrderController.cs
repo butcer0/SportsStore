@@ -15,8 +15,10 @@ namespace SportsStore.Controllers
 
         public OrderController(IOrderRepository repoService, Cart cartService)
         {
+            //IOC Initialize repository
             repository = repoService;
             cart = cartService;
+            
         }
 
         [Authorize]
